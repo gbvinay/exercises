@@ -1,5 +1,6 @@
     package com.java.beans;
 
+    import java.text.SimpleDateFormat;
     import java.util.Date;
 
     /**
@@ -83,9 +84,21 @@
         private static class PersonObject{
 
                 public static void printPersonObject() {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+
                     Date stDate = new Date();
-                    Person personObject = new Person.PersonBuilder("Vinay","G B",1234L).startDate(new Date()).build();
-                    System.out.println("personObject : "+personObject.getFirstName());
+                    Date enDate = new Date();
+                    try{
+                        stDate = format.parse("2015-10-26");
+                        enDate = format.parse("2015-10-27");
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+
+                    Person personObjectStartDate = new Person.PersonBuilder("Vinay","G B",1234L).startDate(stDate).build();
+                    Person personObjectEndDate = new Person.PersonBuilder("Ahmed","M",5678L).endDate(enDate).build();
+                    System.out.println("personObjectStartDate : "+personObjectStartDate.getFirstName());
+                    System.out.println("personObjectEndDate : "+personObjectEndDate.getFirstName());
                 }
         }
 
